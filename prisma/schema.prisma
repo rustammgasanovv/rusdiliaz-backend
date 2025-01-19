@@ -1,0 +1,126 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  first_name String   @map("first_name")
+  last_name  String   @map("last_name")
+  img        String
+  email      String   @unique
+  phone      String   @unique
+  password   String
+  role       String
+  level      String
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime?
+}
+
+model ExamGraded {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  student_id String
+  exam_id    String
+  title      String
+  points     String
+  status     Boolean
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime?
+}
+
+model Topic {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  title      String
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime?
+}
+
+model Unit {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  title     String
+  topicId   String   @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime?
+}
+
+
+model Question {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  questionText String
+  unitId      String   @db.ObjectId
+  point       String?
+  createdAt    DateTime? @default(now())
+  updatedAt    DateTime?
+}
+
+model Option {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  text       String
+  type       Boolean
+  questionId String   @db.ObjectId
+  createdAt  DateTime? @default(now())
+  updatedAt  DateTime?
+}
+
+model essays {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  v        Int    @map("__v")
+  essay    String
+  feedback String
+  level    String
+  score    Json
+  topic    String
+  userId   String
+}
+
+model EssayUnit{
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  level    String
+  title    String
+}
+
+model EssayThemas {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  level String
+  theme String
+}
+
+model SpeakingUnit {
+  id    String @id @default(auto()) @map("_id") @db.ObjectId
+  level String
+  title String
+}
+
+
+model SpeakingThemas {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  level    String
+  theme    String
+}
+
+model speakings {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  v        Int    @map("__v")
+  feedback String
+  level    String
+  score    String
+  text     String
+  topic    String
+  userId   String
+}
+
+model StudentUnit {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  unitId    String   @db.ObjectId
+  studentId String   @db.ObjectId
+}
+
+model StudentForTeacher {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  teacherId String   @db.ObjectId
+  studentId String   @db.ObjectId
+}
