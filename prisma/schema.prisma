@@ -114,13 +114,8 @@ model speakings {
 }
 
 model StudentUnit {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  unitId    String   @db.ObjectId
-  studentId String   @db.ObjectId
-}
-
-model StudentForTeacher {
-  id        String @id @default(auto()) @map("_id") @db.ObjectId
-  teacherId String   @db.ObjectId
-  studentId String   @db.ObjectId
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  userId   String @db.ObjectId
+  unitId   String @db.ObjectId
+  title    String 
 }

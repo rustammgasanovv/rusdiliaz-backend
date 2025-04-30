@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Param } from '@nestjs/common';
+import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { StudentUnitService } from './student-unit.service';
 import { StudentUnit } from '@prisma/client';
 
@@ -8,10 +8,9 @@ export class StudentUnitController {
 
   @Post()
   create(
-    @Body() createStudentUnitDto: { unitId: string; studentId: string },
+    @Body() createStudentUnitDto: { userId: string; unitId: string; title: string },
   ): Promise<StudentUnit> {
-    const { unitId, studentId } = createStudentUnitDto;
-    return this.studentUnitService.create(unitId, studentId);
+    return this.studentUnitService.create(createStudentUnitDto);
   }
 
   @Get()
@@ -19,13 +18,21 @@ export class StudentUnitController {
     return this.studentUnitService.findAll();
   }
 
-  @Get('unit/:unitId')
-  findByUnit(@Param('unitId') unitId: string): Promise<StudentUnit[]> {
-    return this.studentUnitService.findByUnit(unitId);
+  @Get(':id')
+  findOne(@Param('id') id: string): Promise<StudentUnit | null> {
+    return this.studentUnitService.findOne(id);
   }
 
-  @Get('student/:studentId')
-  findByStudent(@Param('studentId') studentId: string): Promise<StudentUnit[]> {
-    return this.studentUnitService.findByStudent(studentId);
+  @Put(':id')
+  update(
+    @Param('id') id: string,
+    @Body() updateStudentUnitDto: { userId?: string; unitId?: string; title?: string },
+  ): Promise<StudentUnit> {
+    return this.studentUnitService.update(id, updateStudentUnitDto);
+  }
+
+  @Delete(':id')
+  remove(@Param('id') id: string): Promise<StudentUnit> {
+    return this.studentUnitService.remove(id);
   }
 }

@@ -29,16 +29,14 @@ import { EssayUnitModule } from './essay-unit/essay-unit.module';
 import { SpeakingUnitService } from './speaking-unit/speaking-unit.service';
 import { SpeakingUnitController } from './speaking-unit/speaking-unit.controller';
 import { SpeakingUnitModule } from './speaking-unit/speaking-unit.module';
-import { StudentUnitController } from './student-unit/student-unit.controller';
 import { StudentUnitService } from './student-unit/student-unit.service';
+import { StudentUnitController } from './student-unit/student-unit.controller';
 import { StudentUnitModule } from './student-unit/student-unit.module';
-import { StudentForTeacherController } from './student-for-teacher/student-for-teacher.controller';
-import { StudentForTeacherService } from './student-for-teacher/student-for-teacher.service';
 
 
 @Module({
   imports: [UserModule, TopicModule, QuestionModule, OptionModule, UnitModule, ExamGradedModule, EssayThemasModule, SpeakingThemasModule, EssayUnitModule, SpeakingUnitModule, StudentUnitModule],
-  controllers: [AppController, QuestionController, UnitController, ExamGradedController, EssayThemasController, SpeakingThemasController, EssayUnitController, SpeakingUnitController, StudentUnitController, StudentForTeacherController],
-  providers: [AppService, PrismaService, QuestionService, UnitService, ExamGradedService, EssayThemasService, SpeakingThemasService, EssayUnitService, SpeakingUnitService, StudentUnitService, StudentForTeacherService],
+  controllers: [AppController, QuestionController, UnitController, ExamGradedController, EssayThemasController, SpeakingThemasController, EssayUnitController, SpeakingUnitController, StudentUnitController],
+  providers: [AppService, PrismaService, QuestionService, UnitService, ExamGradedService, EssayThemasService, SpeakingThemasService, EssayUnitService, SpeakingUnitService, StudentUnitService],
 })
 export class AppModule {}

@@ -6,28 +6,23 @@ import { StudentUnit } from '@prisma/client';
 export class StudentUnitService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async create(unitId: string, studentId: string): Promise<StudentUnit> {
-    return this.prisma.studentUnit.create({
-      data: {
-        unitId,
-        studentId,
-      },
-    });
+  async create(data: { userId: string; unitId: string; title: string }): Promise<StudentUnit> {
+    return this.prisma.studentUnit.create({ data });
   }
 
   async findAll(): Promise<StudentUnit[]> {
     return this.prisma.studentUnit.findMany();
   }
 
-  async findByUnit(unitId: string): Promise<StudentUnit[]> {
-    return this.prisma.studentUnit.findMany({
-      where: { unitId },
-    });
+  async findOne(id: string): Promise<StudentUnit | null> {
+    return this.prisma.studentUnit.findUnique({ where: { id } });
   }
 
-  async findByStudent(studentId: string): Promise<StudentUnit[]> {
-    return this.prisma.studentUnit.findMany({
-      where: { studentId },
-    });
+  async update(id: string, data: { userId?: string; unitId?: string; title?: string }): Promise<StudentUnit> {
+    return this.prisma.studentUnit.update({ where: { id }, data });
+  }
+
+  async remove(id: string): Promise<StudentUnit> {
+    return this.prisma.studentUnit.delete({ where: { id } });
   }
 }
